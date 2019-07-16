@@ -61,5 +61,6 @@ function toggleTrueAndFalseButtons() {
 }
 
 function displayQuestionOnClick(){
-  
+  toggleTrueAndFalseButtons();
+  askQuestionThenRemoveQuestion();
 }
