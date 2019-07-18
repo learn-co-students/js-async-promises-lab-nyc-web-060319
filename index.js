@@ -5,3 +5,48 @@ const questions = [
 ]
 
 let question;
+const questionContainer = document.querySelector('.question-container')
+
+function appendQuestion(question) {
+  questionContainer.innerText = question.questionText
+}
+
+function askQuestionThen(time){
+  question = questions[0]
+  appendQuestion(question)
+  return new Promise((resolve, reject) => {
+    setTimeout(function(){
+      removeQuestion()
+    }, time)
+  })
+}
+
+function removeQuestion(){
+    questionContainer.innerText = '';
+}
+
+function askQuestionThenRemoveQuestion(time){
+  return askQuestionThen(time).then(removeQuestion)
+}
+
+function trueAndFalseButtons() {
+  let buttons = document.querySelector('.true-false-list').querySelectorAll('.btn')
+  return buttons;
+}
+
+function toggleTrueAndFalseButtons() {
+  trueAndFalseButtons().forEach(function(btn){
+    if (btn.classList.contains('hide')){
+      btn.classList.remove('hide')
+    } else {
+      btn.classList.add('hide')
+    }
+  })
+}
+
+function displayQuestionOnClick() {
+  let click = document.querySelector('.waves-light')
+  return click.addEventListener('click', () => {
+    askQuestionThenRemoveQuestion(2000)
+  })
+}
